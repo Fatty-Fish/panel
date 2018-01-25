@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        svg {
+            border: 1px solid black;
+        }
+        
+        path {
+            stroke: #333;
+            fill: transparent;
+            stroke-width: 10px;
+            stroke-linecap: round;
+        }
+        
+        #path2 {
+            stroke: aqua;
+            stroke-width: 8px;
+            stroke-dasharray: 1000px;
+            stroke-dashoffset: 1000px;
+            transition: stroke-dashoffset 1s linear;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" style="position:absolute;">
+    <svg height=500 width=500>
+        <path id="path1" d = "m 210 300 A 100 100 90 1 1 300 300"></path>
+        <path id="path2" d = "m 210 300 A 100 100 90 1 1 300 300"></path>
+    </svg>
+    <script src="./jQuery.js"></script>
+    <script>
+        var oPath = document.getElementById("path1");
+        var len = oPath.getTotalLength();
+        $("input").blur(function() {
+            var val = this.value;
+            val = Number(val);
+            if (!isNaN(val)) {
+                var newVal = 1000 - len * val / 100 + "px";
+                $("#path2").css("stroke-dashoffset", newVal)
+            }
+        })
+    </script>
+</body>
+
+</html>
